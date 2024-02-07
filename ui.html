@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet"  href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,38 +7,67 @@
 <title>Card Stun Plugin</title>
 <style>
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Specify Poppins as the font family */
     padding: 16px;
-    background-color: #f2f2f2;
+    background-color: #363636;
   }
-  h2 {
-    color: #333;
+  div {
+    display: flex;
+    justify-content: space-between;
+
+  }
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #f1f1f1;
     text-align: center;
     margin-bottom: 20px;
   }
+  p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+  }
+  p#dark-mode-p {
+    color: #f1f1f1;
+  }
+  /* Your existing CSS styles */
+  input[type="text"]:focus,
+input[type="email"]:focus {
+    outline-color: #ef9f0c; /* Change the outline color to blue when focused */
+    outline-width: 2px; /* Set the outline width to 2 pixels */
+    outline-style: solid; /* Set the outline style to dashed */
+    outline-offset: 1px; /* Set the outline offset to 2 pixels */
+}
+
   input[type="text"],
   input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+      font-family: 'Poppins', sans-serif; /* Apply Poppins font to input fields */
+      width: 100%;
+      padding-left: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin-bottom: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
   button {
-    width: 100%;
-    padding: 10px;
+    width: 40%;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 5px;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     color: white;
-    background-color: #4CAF50; /* Green */
+    background-color: #007bff; /* Green */
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   button:hover {
-    background-color: #45a049;
+    background-color: #0960bd;
   }
   button#cancel {
     background-color: #f44336; /* Red */
@@ -48,11 +78,17 @@
 </style>
 </head>
 <body>
-  <h2>Card Stun Plugin</h2>
+  <h1>Card Stun Plugin</h1>
   <input id="name" type="text" placeholder="Name"/>
   <input id="email" type="email" placeholder="Email"/>
-  <button id="create">Create</button>
-  <button id="cancel">Cancel</button>
+  <div>
+    <button id="create"><p>Create</p></button>
+    <button id="cancel"><p>Cancel</p></button>
+  </div>
+  <div class="switch">
+    <input class="switch__toggle" type="checkbox" id="dark-mode-on" />
+    <label class="switch__label" for="dark-mode-on"><p id="dark-mode-p">Dark Mode</p></label>
+  </div>
   <script>
     // ... Your script here ...
     document.getElementById('create').onclick = () => {
