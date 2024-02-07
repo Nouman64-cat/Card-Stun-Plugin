@@ -2,14 +2,21 @@
 
 figma.showUI(__html__);
 
-figma.ui.resize(400,400);
+figma.ui.resize(400,300);
 
-figma.ui.onmessage = async (msg: { type: string; name: string; email: string; posts: string; following: string; followers: string }) => {
+figma.ui.onmessage = async (msg: { type: string; name: string; email: string; posts: string; following: string; followers: string; darkModeSet: boolean }) => {
   if (msg.type === 'create-card') {
     // Create rectangle
+    const mode: boolean = msg.darkModeSet;
     const rect: RectangleNode = figma.createRectangle();
     rect.resize(230, 100); // Set the desired size of the rectangle
-    rect.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }]; // A light gray color for the rectangle
+    // Define the color based on the mode
+    const color = mode
+    ? { r: 0.2, g: 0.2, b: 0.2 } // Dark color
+    : { r: 0.98, g: 0.98, b: 0.98 }; // Light color
+
+// Set the fills property of the rect object using the ternary operator
+    rect.fills = [{ type: 'SOLID', color }]; // A light gray color for the rectangle
     rect.cornerRadius = 4;
     //giving rectangle shadow
     rect.effects = [
@@ -36,6 +43,10 @@ figma.ui.onmessage = async (msg: { type: string; name: string; email: string; po
     nameText.fontName = fontName;
     nameText.characters = msg.name; // Set the text for the name
     nameText.fontSize = 12; // Set font size
+    const colorText = mode
+    ? { r: 0.98, g: 0.98, b: 0.98 } // Light color
+    : { r: 0.2, g: 0.2, b: 0.2 }; // Dark color
+    nameText.fills = [{ type: 'SOLID', color: colorText }]; // Set the name text color to #686868
     
     // Create text node for the email
     const emailText: TextNode = figma.createText();
@@ -81,18 +92,21 @@ figma.ui.onmessage = async (msg: { type: string; name: string; email: string; po
     postsText.fontName = fontName;
     postsText.characters = `${msg.posts}`;
     postsText.fontSize = 7; // Set font size
+    postsText.fills = [{ type: 'SOLID', color: colorText}];
 
     // Create text node for the 'Following' label and value
     const followingText: TextNode = figma.createText();
     followingText.fontName = fontName;
     followingText.characters = `${msg.following}`;
     followingText.fontSize = 7; // Set font size
+    followingText.fills = [{ type: 'SOLID', color: colorText}];
 
     // Create text node for the 'Followers' label and value
     const followersText: TextNode = figma.createText();
     followersText.fontName = fontName;
     followersText.characters = `${msg.followers}`;
     followersText.fontSize = 7; // Set font size
+    followersText.fills = [{ type: 'SOLID', color: colorText}];
 
     // Append the additional text nodes to the canvas to compute their width
     figma.currentPage.appendChild(postsText);
